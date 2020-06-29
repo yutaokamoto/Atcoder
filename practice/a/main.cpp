@@ -8,6 +8,6 @@ int main() {
     cin >> b >> c;
     string s;
     cin >> s;
-    cout << a+b+c << s << endl;
+    cout << a+b+c << " " << s << endl;
     return 0;
 }
