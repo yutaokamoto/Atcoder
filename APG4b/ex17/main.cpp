@@ -2,12 +2,23 @@
 using namespace std;
  
 // 参照渡しを用いて、呼び出し側の変数の値を変更する
-void saiten(/* 呼び出し側に対応するように引数を書く */) {
+void saiten(vector<vector<int>>& a, int& c_c, int& w_c) {
   // 呼び出し側のAの各マスを正しい値に修正する
   // Aのうち、正しい値の書かれたマスの個数を correct_count に入れる
   // Aのうち、誤った値の書かれたマスの個数を wrong_count に入れる
  
   // ここにプログラムを追記
+  for(int i = 0; i < 9; i++){
+      for(int j = 0; j < 9; j++){
+          if(a[i][j] == (i+1)*(j+1)){
+              c_c++;
+          }
+          else{
+              w_c++;
+          }
+          a[i][j] = (i+1)*(j+1);
+      }
+  }
 }
  
  
