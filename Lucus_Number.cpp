@@ -1,3 +1,5 @@
+//APG4b 3.01の練習問題
+
 #include <bits/stdc++.h>
 using namespace std;
 
