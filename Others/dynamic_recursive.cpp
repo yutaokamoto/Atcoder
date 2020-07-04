@@ -13,7 +13,7 @@ void dynamic_row(vector<vector<int>>& T, vector<Item>& item, int r, int c);
 int R, C;
 
 int main(){
-    cin >> R >> C; // R : キャパシティー, C : アイテムを使う個数
+    cin >> R >> C; // R : キャパシティー, C : 使うアイテムの個数
 
     //テーブルT，アイテムの集合item
     vector<vector<int>> T(R+1, vector<int>(C+1, 0));
