@@ -17,5 +17,22 @@ int main(){
     vector<int> v{2};
     v.resize(5);
     for_each(v.begin(), v.end(), [](int i){cout << i << "   ";});
+    cout << endl;
+
+    //2進数表記
+    cout << 0b011+0b111 << endl;
+    int a = 0b011;
+    int b = 0b111;
+    cout << "b%a = " << b%a << endl;
+    cout << "aの1桁目は，" << ((a>>1)&1) << endl;
+    cout << bitset<4>(~(0b011>>3)) << endl;
+
+    //シフト演算子
+    ////左に1つシフト
+    cout << (0b1<<1) << endl;
+    ////右に1つシフト
+    cout << (0b1>>1) << endl;
+
+    cout << bitset<200000>(0) << endl;
     return 0;
 }
