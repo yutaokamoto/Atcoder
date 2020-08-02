@@ -10,7 +10,7 @@ int main(){
     cin >> N >> D;
     for(int i = 0; i < N; i++){
         cin >> X >> Y;
-        l = pow(pow(X, 2)+pow(Y, 2), 0.5);
+        l = pow(pow(X, 2)+pow(Y, 2), 0.5); // pow(X, 1/2)などは×!!
         //cout << l << endl;
         if(l <= D){
             c++;
