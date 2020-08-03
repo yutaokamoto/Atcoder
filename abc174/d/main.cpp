@@ -19,17 +19,16 @@ int main(){
             R++;
         }
     }
-    if(R == N){
+    if(R == N or W == N){
         cout << 0 << endl;
     }
     else{
-        //cout << R << " " << W << endl;
-        
+        //cout << R << " " << W << endl;
         for(int w = 0; w <= N; w++){
             temp = (W - w)*(W-w>0) + W*(W-w<=0); //白を赤にする個数．
             if(temp + R != N){
                 right_R = 0;
-                for(int r = N-temp-1; r <= N; r++){
+                for(int r = N-temp-1; r < N; r++){
                     if(c[r] == 'R'){
                         right_R++;
                     }
