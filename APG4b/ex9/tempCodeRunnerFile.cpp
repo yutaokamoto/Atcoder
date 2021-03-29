@@ -7,14 +7,11 @@ int main() {
  
   // 1.の出力
   x++;
-  cout << x << endl;
+  cout << x*(a+b) << endl;
 
-  x *= a+b;
-  cout << x << endl;
+  int a2 = x*(a+b);
+  cout << a2*a2 <<endl;
 
-  x *= x;
-  cout << x << endl;
-
-  x--;
-  cout << x << endl;
+  int a3 = a2*a2-1;
+  cout << a3 << endl; 
 }
