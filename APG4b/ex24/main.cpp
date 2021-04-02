@@ -49,8 +49,7 @@ struct Clock{
         return "0"*(hour<9) + hour + ":" + "0"*(minute<9) + minute + ":" + "0"*(second<9) + second;
     };
     void shift(int diff_second){}
-}
-
+};
 
 // -------------------
 // ここから先は変更しない
