@@ -46,9 +46,20 @@ struct Clock{
         second = s;
     };
     string to_str(){
-        return "0"*(hour<9) + hour + ":" + "0"*(minute<9) + minute + ":" + "0"*(second<9) + second;
+        string t = "";
+        if(hour<9){t += "0";}
+        t += hour;
+        if(minute<9){t += "0";}
+        t += minute;
+        if(second<9){t += "0";}
+        t += second;
+        return t;
     };
-    void shift(int diff_second){}
+    void shift(int diff_second){
+        vector<int> T;
+        second += diff_second;
+        if(second<0){}
+    }
 };
 
 // -------------------
