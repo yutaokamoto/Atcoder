@@ -48,17 +48,31 @@ struct Clock{
     string to_str(){
         string t = "";
         if(hour<9){t += "0";}
-        t += hour;
-        if(minute<9){t += "0";}
-        t += minute;
-        if(second<9){t += "0";}
-        t += second;
+        t += to_string(hour) + ":";
+        if(minute<=9){t += "0";}
+        t += to_string(minute) + ":";
+        if(second<=9){t += "0";}
+        t += to_string(second);
         return t;
     };
     void shift(int diff_second){
-        vector<int> T;
+        if(abs(diff_second)>=3600){
+            hour += diff_second/3600;
+            diff_second %= 3600;
+        }
+        if(abs(diff_second)>=60){
+            minute += diff_second/60;
+            diff_second %= 60;
+        }
         second += diff_second;
-        if(second<0){}
+        if(second<0){second += 60; minute--;}
+        else if(second>=60){second -= 60; minute++;}
+
+        if(minute<0){minute += 60; hour--;}
+        else if(minute>=60){minute -= 60; hour++;}
+
+        if(hour<0){hour += 24;}
+        else if(hour>=24){hour -= 24;}
     }
 };
 
