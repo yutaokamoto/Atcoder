@@ -10,18 +10,21 @@ void print_vec(vector<int> vec) {
   cout << "]" << endl;
 }
 
+void print_int(int i){
+	cout << i << endl;
+}
+
 int main(){
+	// 命令の個数
 	int N;
 	cin >> N;
-	vector<string> orders;
-	for(int i=0; i<N; i++){cin >> orders.at(i);}
-	map<char, int> integers(5, 0);
-	int i_0 = 0;
-	vector<vector<int>> vecs(5);
-	int i_1 = 0;
-	for(string order : orders){
-		for(char c : order){
-			integers[i_0] += (int)c;
+	// 命令
+	vector<vector<string>> orders(N);
+	for(int i=0; i<N; i++){
+		string word;
+		while(cin>>word){
+			orders.at(i).push_back(word);
+			if(word==";"){break;}
 		}
 	}
 	return 0;
