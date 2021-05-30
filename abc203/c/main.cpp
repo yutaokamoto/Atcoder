@@ -24,28 +24,11 @@ int main(){
 		cin >> A.at(i) >> B.at(i);
 	}
 	sort2vectors(A, B);
-	long long now = 0;
-	long long  index = 0;
-	
-	/*for(int i=0; i<A.size(); i++){
-		if(now!=A.at(i)){
-			K -= A.at(i) - now;
-			now = A.at(i);
+	for(int i=0; i<A.size(); i++){
+		if(A.at(i)<=K){
+			K += B.at(i);
 		}
-		cout << now << endl;
-		K += B.at(i);
-	}*/
-	/*while(true){
-		now++;
-		K--;
-		while((index<A.size())&&(now==A.at(index))){
-			K += B.at(index);
-			index++;
-		}
-		if(K==0){
-			break;
-		}
-	}*/
-	cout << now+K << endl;
+	}
+	cout << K << endl;
 	return 0;
 }
