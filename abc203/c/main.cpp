@@ -18,7 +18,7 @@ void sort2vectors(vector<long long> &av, vector<long long> &bv)
 int main(){
 	long long N, K;
 	cin >> N >> K;
-	vector<long long> A(N);
+	/*vector<long long> A(N);
 	vector<long long> B(N);
 	for(long long i=0; i<N; i++){
 		cin >> A.at(i) >> B.at(i);
@@ -27,6 +27,22 @@ int main(){
 	for(int i=0; i<A.size(); i++){
 		if(A.at(i)<=K){
 			K += B.at(i);
+		}
+	}
+	cout << K << endl;*/
+
+	map<long long, int> Friend;
+	long long A;
+	int B;
+	for(long long i=0; i<N; i++){
+		cin >> A >> B;
+		if(Friend.count(A)==0){Friend[A]=B;}
+		else{Friend.at(A)+=B;}
+	}
+	for(auto i=Friend.begin(); i!=Friend.end(); i++){
+		//cout << i->first << endl;
+		if(i->first<=K){
+			K += i->second;
 		}
 	}
 	cout << K << endl;
