@@ -105,6 +105,7 @@ int main(){
 				// 値の表示
 				if(flag_print_int){
 					print_int(a, b, ope);
+					a = 0;
 					flag_print_int = false;
 				}
 				break;
@@ -118,20 +119,28 @@ int main(){
 			if(word=="="){flag_eq=true; continue;}
 			//// =の右側の項 or print_intの右側の操作
 			if(word=="["){flag_par=true; continue;}
-			if(word=="]"){flag_par=false; continue;}
+			if(word=="]"){flag_par=false;}
 			if((flag_eq || flag_print_vec) && !flag_int){
-				if("0"<=word && word<="9"){
-					//if(flag_ope){cout << word << " " << flag_ope << endl;}
+				if("0"<=word && word<="9"){ // a + [] + ...のような形の場合の[]
 					if(!flag_ope){vec_a.push_back(stoi(word));}
 					else{vec_b.push_back(stoi(word));}
+					/*if(flag_ope){
+						cout << word << " " << flag_ope << endl;
+						for(auto i : vec_a){cout << i << " ";}
+						cout << endl;
+						for(auto i : vec_b){cout << i << " ";}
+						cout << endl;
+					}*/
 					continue;
 				}
 				else if("a"<=word && word<="z"){
-					if(flag_par){
-						if(!flag_ope){vec_a.clear(); vec_a.push_back(dict_int.at(word));}
-						else{vec_a.clear(); vec_b.push_back(dict_int.at(word));}
+					if(flag_par){ // []のなかにint型の変数がある場合
+						//if(flag_ope){cout << dict_int.at(word) << endl;}
+						if(!flag_ope){vec_a.push_back(dict_int.at(word));}
+						else{vec_b.push_back(dict_int.at(word));}
+						continue;
 					}
-					else{
+					else{ // a + []のような形の場合のa
 						if(!flag_ope){vec_a = dict_vec.at(word);}
 						else{vec_b = dict_vec.at(word);}
 						//if(vec_a.size()==0 && vec_b.size()==0){vec_a = dict_vec.at(word);}
@@ -140,7 +149,6 @@ int main(){
 				}
 			}
 			//// 足し算、引き算の準備
-			//if((flag_vec || flag_print_vec) && (word=="+" || word=="-")){ope=word; flag_ope=true; continue;}
 			if(word=="+" || word=="-"){ope=word; flag_ope=true; continue;}
 			//// 足し算、引き算を行う
 			if(flag_ope && (flag_vec || flag_print_vec)){
@@ -160,6 +168,7 @@ int main(){
 				// 値の表示
 				if(flag_print_vec){
 					print_vec(vec_a);
+					vec_a.clear();
 					flag_print_vec = false;
 				}
 				break;
