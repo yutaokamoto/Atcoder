@@ -20,7 +20,7 @@ int cal_int(int a, int b, string ope){
 	if(ope=="+"){
 		return a+b;
 	}
-	else if(ope=="-"){
+	else{// if(ope=="-"){
 		return a-b;
 	}
 }
@@ -62,11 +62,12 @@ int main(){
 		string ope = ""; // 命令の中で出てくる演算子を入れておく変数
 		bool flag_par = false;
 		while(cin>>word){
+			cout << word << endl;
 			orders.at(i).push_back(word);
 			if(word=="int"){flag_int=true;}
-			if(flag_int){dict_int.at(word)=0; flag_int=false;}
+			if(flag_int){dict_int[word]=0;}// flag_int=false;}
 			if(word=="vec"){flag_vec=true;}
-			if(flag_vec){dict_vec.at(word)={0,}; flag_vec=false;}
+			if(flag_vec){dict_vec[word]={0,};}// flag_vec=false;}
 			if(word=="="){flag_eq=true;}
 			// int型の変数の処理
 			if(flag_eq){
