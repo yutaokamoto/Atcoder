@@ -3,7 +3,8 @@ using namespace std;
 
 int N, D;
 int X, Y;
-long double l;
+//long double l;
+double l;
 int c = 0;
 
 int main(){
