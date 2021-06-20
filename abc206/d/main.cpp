@@ -1,35 +1,26 @@
 #include <bits/stdc++.h>
+#include<atcoder/all>
+using namespace atcoder;
 using namespace std;
+using ll = long long;
+#define rep(i, n) for(int i=0; i<n; i++)
 
 int main(){
 	int N;
 	cin >> N;
-	cout << N/2 << endl;
 	vector<int> A(N);
-	vector<int> f;
-	vector<int> l;
-	int A_i;
-	for(int i=0; i<N; i++){
-		cin >> A_i;
-		A.at(i) = A_i;
-		if(N%2==0){
-			if(i<N/2){f.push_back(A_i);}
-			else{l.push_back(A_i);}
-		}
-		else{
-			if(i<N/2+1){f.push_back(A_i);}
-			if(N/2-1<i){l.push_back(A_i);}
-		}
+	rep(i,N){cin>>A.at(i);}
+	// あくまでufの元はA_iなので、A_iの最大値が入るようにノードを用意しないといけない
+	dsu uf(200005);
+	int MAX_REP = (int)N/2;
+	for(int i=0; i<MAX_REP; i++){
+		//cout << A.at(i) << " " << A.at(N-1-i) << endl;
+		uf.merge(A[i], A[N-1-i]);
 	}
-	//for(auto i : f){cout << i << " ";}
-	//cout << endl;
-	//for(auto i : l){cout << i << " ";}
-	reverse(l.begin(), l.end());
-	vector<bool> comp(f.size());
-	for(int i=0; i<f.size(); i++){
-		if(f.at(i)==l.at(i)){comp.at(i)=true;}
-		else{comp.at(i)=false;}
-		cout << comp.at(i) << " ";
+	ll ans = 0;
+	for(auto tree : uf.groups()){
+		ans += tree.size()-1;
 	}
+	cout << ans << endl;
 	return 0;
 }

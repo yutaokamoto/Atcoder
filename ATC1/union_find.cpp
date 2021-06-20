@@ -1,23 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define rep(i,n) for (int i=0; i < int(n); i++)
 
 // https://atcoder.jp/contests/atc001/tasks/unionfind_a の問題
-// 未完成 : すでに存在している辺を何度も追加したりすることに対応していないと思う
+// 未完成
 
-struct node{
+/*struct node{
 	int value;
 	node *root = NULL;
 	node *left_child = NULL;
 	node *right_child = NULL;
-	/*node(int value_, int *root_, int *left_child_, int *right_child_){
-		int value = value_;
-		int *root = root_;
-		int *left_child = left_child_;
-		int *right_child = right_child_;
-	}*/
-};
+};*/
 
-struct UnionFind{
+/*struct UnionFind{
 	vector<node> roots;
 	UnionFind(int N){
 		roots.resize(N);
@@ -42,7 +37,7 @@ struct UnionFind{
 			Stack.push(n->left_child);
 		}
 		return false;
-	}*/
+	}
 	bool dfs(node n, int x){
 		if(n.value==x){return true;}
 		if(n.right_child!=NULL){dfs(*n.right_child, x);}
@@ -78,6 +73,7 @@ struct UnionFind{
 		node *tree_x = find(x);
 		node *tree_y = find(y);
 		// xを含む木とyを含む木を併合する
+		if(tree_x==tree_y){return;}
 		//// xを含む木の中で子を1つしか持たない or 子を持たないノードのうち最も高さの低いものにyを含む木を繋げる(right_child or left_child)
 		node *vacant = find_vacant(tree_x);
 		//cout << vacant->value << endl;
@@ -97,9 +93,59 @@ struct UnionFind{
 	bool judge(int x, int y){
 		node *tree_x = find(x);
 		node *tree_y = find(y);
-		if(tree_x->value==tree_y->value){return true;}
+		if(tree_x==tree_y){return true;}
 		return false;
 	}
+};*/
+
+// 参考 : https://dai1741.github.io/maximum-algo-2012/docs/minimum-spanning-tree/
+
+// 素集合データ構造
+struct UnionFind
+{
+  // par[i]：データiが属する木の親の番号。i == par[i]のとき、データiは木の根ノードである
+  vector<int> par;
+  // sizes[i]：根ノードiの木に含まれるデータの数。iが根ノードでない場合は無意味な値となる
+  vector<int> sizes;
+
+  UnionFind(int n) : par(n), sizes(n, 1) {
+    // 最初は全てのデータiがグループiに存在するものとして初期化
+    rep(i,n) par[i] = i;
+  }
+
+  // データxが属する木の根を得る
+  int find(int x) {
+    if (x == par[x]) return x;
+    return par[x] = find(par[x]);  // 根を張り替えながら再帰的に根ノードを探す
+  }
+
+  // 2つのデータx, yが属する木をマージする
+  void unite(int x, int y) {
+    // データの根ノードを得る
+    x = find(x);
+    y = find(y);
+
+    // 既に同じ木に属しているならマージしない
+    if (x == y) return;
+
+    // xの木がyの木より大きくなるようにする
+    if (sizes[x] < sizes[y]) swap(x, y);
+
+    // xがyの親になるように連結する
+    par[y] = x;
+    sizes[x] += sizes[y];
+    // sizes[y] = 0;  // sizes[y]は無意味な値となるので0を入れておいてもよい
+  }
+
+  // 2つのデータx, yが属する木が同じならtrueを返す
+  bool same(int x, int y) {
+    return find(x) == find(y);
+  }
+
+  // データxが含まれる木の大きさを返す
+  int size(int x) {
+    return sizes[find(x)];
+  }
 };
 
 int main(){
@@ -113,12 +159,14 @@ int main(){
 		cin >> p >> a >> b;
 		if(p==0){
 			// 連結クエリ
-			uf.union_trees(a, b);
+			//uf.union_trees(a, b);
+			uf.unite(a, b);
 		}
 		else if(p==1){
 			// 判定クエリ
 			//// 連結である
-			if(uf.judge(a, b)){cout << "Yes" << endl;}
+			//if(uf.judge(a, b)){cout << "Yes" << endl;}
+			if(uf.same(a, b)){cout << "Yes" << endl;}
 			//// 連結でない
 			else{cout << "No" << endl;}
 		}
