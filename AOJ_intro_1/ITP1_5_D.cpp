@@ -3,19 +3,30 @@
 //using namespace atcoder;
 using namespace std;
 
-vector<int> par;
+void call(int n){
+  int i = 1;
+ CHECK_NUM:
+  int x = i;
+  if ( x % 3 == 0 ){
+    cout << " " << i;
+    goto END_CHECK_NUM;
+  }
+ INCLUDE3:
+  if ( x % 10 == 3 ){
+    cout << " " << i;
+    goto END_CHECK_NUM;
+  }
+  x /= 10;
+  if ( x ) goto INCLUDE3;
+ END_CHECK_NUM:
+  if ( ++i <= n ) goto CHECK_NUM;
 
-int find(int x){
-	if(par[x]==x)return x;
-	return par[x] = find(par[x]);
+  cout << endl;
 }
 
 int main(){
 	int n;
 	cin >> n;
-	iota(par.begin(), par.end(), -1);
-	par.resize(n);
-	par[0] = 0;
-	cout << find(1) << endl;
+	call(n);
 	return 0;
 }
