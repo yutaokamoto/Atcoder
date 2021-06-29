@@ -14,27 +14,30 @@ int main(){
 		for(int i=1; i<n+1; i++){
 			for(int j=i+1; j<n+1; j++){
 				res = x - (i + j);
+				/*
 				if(res<=j){break;}
 				if((1 <= res && res <= n) && (res != i && res != j)){
 					//cout << i << " " << j << " " << res << endl;
 					cnt++;
 				}
-				/*
-				cout << j << "番目" << endl;
+				*/
+				///*
+				////cout << j << "番目" << endl;
 				vector<int> v(n);
 				iota(v.begin(), v.end(), 1);
-				for(auto i : v){cout << i << " ";}
-				cout << endl;
+				////for(auto i : v){cout << i << " ";}
+				////cout << endl;
 				// 要素を消す方針でいくと、今回は複数回削除を行うので配列の大きさが変わってしまいめんどくさい
 				//v.erase(v.begin()+(i-1));
 				//v.erase(v.begin()+(j-1));
 				v.at(i-1) = x;
 				v.at(j-1) = x;
-				for(auto i : v){cout << i << " ";}
-				cout << endl;
-				cnt += binary_search(v.begin(), v.end(), res) ? 1 : 0;
-				cout << endl;
-				*/
+				////for(auto i : v){cout << i << " ";}
+				////cout << endl;
+				auto k = lower_bound(v.begin(), v.end(), res);
+				if(j < *k){cnt++;}
+				////cout << endl;
+				//*/
 			}
 		}
 		cout << cnt << endl;
